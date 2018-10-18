@@ -1,23 +1,23 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE UndecidableInstances #-}
-{-# LANGUAGE AllowAmbiguousTypes #-}
-{-# LANGUAGE StandaloneDeriving         #-}
+{-# LANGUAGE AllowAmbiguousTypes        #-}
+{-# LANGUAGE DataKinds                  #-}
+{-# LANGUAGE FlexibleContexts           #-}
+{-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
+{-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
+{-# LANGUAGE StandaloneDeriving         #-}
+{-# LANGUAGE TypeOperators              #-}
+{-# LANGUAGE UndecidableInstances       #-}
 
 module Main where
 
-import Dhall
-import GHC.TypeLits
-import Data.Extensible
-import Data.Functor.Identity
-import Data.Proxy
-import Data.Text
+import           Data.Extensible
+import           Data.Functor.Identity
+import           Data.Proxy
+import           Data.Text
+import           Dhall
+import           GHC.TypeLits
 
 
 instance Forall (KeyValue KnownSymbol (Instance1 Interpret h)) xs => Interpret (Field h :* xs) where
@@ -34,7 +34,7 @@ example1 :: IO Example1
 example1 = input auto "{ foo= 1 }"
 
 type Example2 = Record '[ "foo" >: Text
-                        , "bar" >: Record 
+                        , "bar" >: Record
                           '[ "baz" >: Text
                            , "qux" >: Natural]
                         ]
