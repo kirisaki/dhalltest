@@ -21,10 +21,10 @@ import           GHC.TypeLits
 
 
 instance Forall (KeyValue KnownSymbol (Instance1 Interpret h)) xs => Interpret (Field h :* xs) where
-  autoWith _ = Dhall.record (hgenerateFor
+  autoWith opts = Dhall.record (hgenerateFor
               (Proxy :: Proxy (KeyValue KnownSymbol (Instance1 Interpret h)))
               (\m -> let k = (pack . symbolVal . proxyAssocKey) m
-                     in field k (fmap Field auto)))
+                     in field k (fmap Field autoWith opts)))
 
 deriving instance Interpret (h (AssocValue kv)) => Interpret (Field h kv)
 deriving instance Interpret a => Interpret (Identity a)
